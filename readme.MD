@@ -43,7 +43,7 @@ Then, for example, to get the Departure Board  Information for London Victoria (
 const openLDBWS     = require('ldbws-json');
 const operation     = require('ldbws-json/LDBWSOperation');
 const requestData   = require('ldbws-json/LDBWSRequestData');
-const resultKeys    = require('ldbws-json/LDBWSReturn');
+const operationInfo = require('ldbws-json/LDBWSOperationInfo');
 
 // Put a valid Token here
 const token = "{PUT_YOUR_ASSIGNED_TOKEN_HERE}";
@@ -51,7 +51,7 @@ const token = "{PUT_YOUR_ASSIGNED_TOKEN_HERE}";
 // Select the operation method we will call and use the helper to extract the result
 // use of resultkeys is optional and provided for convienience only
 const method = operation.GET_DEPARTURE_BOARD;
-const key = resultKeys[method];
+const key = operationInfo[method].key;
 
 // populate the required data structure here we use the CRS code for London Victoria
 const options = Object.assign({}, requestData.Board);

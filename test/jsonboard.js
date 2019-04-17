@@ -6,7 +6,7 @@ describe('JSON Board Test', function() {
   describe('#Departure Board JSON for Kings Cross', function() {
     it('should have London Kings Cross as locationName', async function() {
         const method = require('../LDBWSOperation').GET_DEPARTURE_BOARD;
-        const resultKey = require('../LDBWSReturn')[method];
+        const resultKey = require('../LDBWSOperationInfo')[method].key;
         const options = Object.assign({}, require('../LDBWSRequestData').Board);
         options.crs = "KGX";
 

@@ -2,6 +2,7 @@
 /**
  * LDBWSReturn.js
  * This is a helper that defines the return key for the LDBWS Operation Requests. 
+ * @deprecated LDBWSOperationInfo supercedes this 
  */
 
 const ReturnKey = {

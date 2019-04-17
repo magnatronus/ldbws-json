@@ -1,11 +1,14 @@
 {
   "name": "ldbws-json",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "node": ">=7.6"
   },
   "description": "JSON Interface for the National Rail Enquiries Darwin OpenLDBWS SOAP service. Requires a valid token to access services.",
-  "author": "Steve Rogers <srogers.uk@gmail.com>",
+  "author": {
+    "name": "SpiralArm Consulting ltd",
+    "email": "srogers.uk@gmail.com"
+  },
   "license": "MIT",
   "homepage": "https://github.com/magnatronus/ldbws-json",
   "repository": {
