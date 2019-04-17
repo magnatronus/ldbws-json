@@ -43,9 +43,15 @@ Then, for example, to get the Departure Board  Information for London Victoria (
 const openLDBWS     = require('ldbws-json');
 const operation     = require('ldbws-json/LDBWSOperation');
 const requestData   = require('ldbws-json/LDBWSRequestData');
+const resultKeys    = require('ldbws-json/LDBWSReturn');
 
 // Put a valid Token here
 const token = "{PUT_YOUR_ASSIGNED_TOKEN_HERE}";
+
+// Select the operation method we will call and use the helper to extract the result
+// use of resultkeys is optional and provided for convienience only
+const method = operation.GET_DEPARTURE_BOARD;
+const key = resultKeys[method];
 
 // populate the required data structure here we use the CRS code for London Victoria
 const options = Object.assign({}, requestData.Board);
@@ -55,20 +61,20 @@ options.crs = "VIC";
 const api = new openLDBWS(token);
 api.call(operation.GET_DEPARTURE_BOARD, options).then((board)=>{
     //This should log out London Victoria
-    console.log(board.GetStationBoardResult.locationName);
+    console.log(board[key].locationName);
 });
 
 ```
 
 # Departure type calls
-When using the **filterList** param for *departure* based calls set up the list(1 or more) or **crs** codes as follows:
+When using the **filterList** param for *departure* based calls set up the list (1 or more) for **crs** codes as follows:
 ```
 const options = Object.assign({}, requestData.Departure);
 options.crs = "KGX";
 options.timeWindow = 120;
 options.filterList = ['EDB','ARL'];
 ```
-In the example this will get the departure list from London Kings Cross to EdinBurgh and Arlesey  within the next 120 mins.
+In the example this will get the departure list from London Kings Cross to Edinburgh and Arlesey  within the next 120 mins.
 
 
 
