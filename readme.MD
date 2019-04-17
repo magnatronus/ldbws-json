@@ -60,6 +60,17 @@ api.call(operation.GET_DEPARTURE_BOARD, options).then((board)=>{
 
 ```
 
+# Departure type calls
+When using the **filterList** param for *departure* based calls set up the list(1 or more) or **crs** codes as follows:
+```
+const options = Object.assign({}, requestData.Departure);
+options.crs = "KGX";
+options.timeWindow = 120;
+options.filterList = ['EDB','ARL'];
+```
+In the example this will get the departure list from London Kings Cross to EdinBurgh and Arlesey  within the next 120 mins.
+
+
 
 
 # Mocha Tests

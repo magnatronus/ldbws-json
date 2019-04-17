@@ -33,7 +33,15 @@ class LDBWSSoap {
     _payload(options) {
         let body = ``;
         Object.keys(options).forEach(function(key){
-              body += `<${key}>${options[key]}</${key}>`;
+            let val="";
+            if(key == "filterList"){
+                options[key].forEach((crs) => {
+                    val += `<crs>${crs}</crs>`;
+                });
+            } else {
+                val = `${options[key]}`                
+            }
+             body += `<${key}>${val}</${key}>`;
         });
         return `<Body><${this.request}Request xmlns="http://thalesgroup.com/RTTI/2017-02-02/ldb/">${body}</${this.request}Request></Body>`;
     }

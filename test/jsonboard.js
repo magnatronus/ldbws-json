@@ -2,7 +2,7 @@ var assert = require('assert');
 const OpenLDBWS = require('../index');
 const token = process.env.npm_config_TOKEN;
 
-describe('JSON Tests', function() {
+describe('JSON Board Test', function() {
   describe('#Departure Board JSON for Kings Cross', function() {
     it('should have London Kings Cross as locationName', async function() {
         const method = require('../LDBWSOperation').GET_DEPARTURE_BOARD;

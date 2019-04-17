@@ -4,7 +4,8 @@ const OpenLDBWS = require('../index');
 const token = process.env.npm_config_TOKEN;
 
 
-describe('SOAP Tests', function() {
+describe('SOAP Board Test', function() {
+  
   describe('#Departure Board SOAP for Kings Cross', function() {
     const method = require('../LDBWSOperation').GET_DEPARTURE_BOARD;
     const options = Object.assign({}, require('../LDBWSRequestData').Board);
@@ -15,4 +16,5 @@ describe('SOAP Tests', function() {
       assert.equal(soapCall, envelope);
     });
   });
+
 });
