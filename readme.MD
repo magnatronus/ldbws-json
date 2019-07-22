@@ -1,8 +1,10 @@
 # ldbws-json
 `ldbws-json` is a package that can be used to access the National Rail Enquiries [OpenLDBWS web service](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/) to query for real time train information. This is the same info that is used to power the Live Departure Boards at UK Railway stations. This service is a SOAP Web service and the ouput is XML, so this package was created to convert these calls into a JSON format.
 
+WIP - The staff web service, [OpenLBDSVWS web service](https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/) is also in the process of being implemented. They key provided from this service is independent and different from the key provided by the OpenLDBWS service.
+
 ## Access Token
-To use the OpenLDBWS service you **MUST** supply a valid token, which can be obtained by registering. IF no **token**, or an invalid one is supplied the call will be rejected. See [here](http://www.nationalrail.co.uk/100296.aspx) for more details on registering as a developer.
+To use the OpenLDBWS or OpenLDBSVWS service you **MUST** supply a valid token, which can be obtained by registering. IF no **token**, or an invalid one is supplied the call will be rejected. See [here](http://www.nationalrail.co.uk/100296.aspx) for more details on registering as a developer.
 
 
 ## Overview
@@ -10,9 +12,15 @@ The main class used should be accessed as follows:
 
     const openLDBWS = require('ldbws-json');
 
+If you wish to use the staff endpoint (OpenLDBSVWS);
+
+    const OpenLDBSVWS = require('ldbws-json').OpenLDBSVWS
+
 then create an instance and pass it a valid access token.
 
     const api = new openLDBWS("{my access token}");
+    // and/or
+    const staffApi = new OpenLDBSVWS("{my staff access token}");
 
 
 The method to obtain data is **call**. This is an **async** method so must be called using either *await* or as a *promise*.
@@ -54,8 +62,11 @@ const method = operation.GET_DEPARTURE_BOARD;
 const key = operationInfo[method].key;
 
 // populate the required data structure here we use the CRS code for London Victoria
-const options = Object.assign({}, requestData.Board);
-options.crs = "VIC";
+// This uses the spread operator so a recent node version is needed
+const options = {
+    ...requestData.Board,
+    crs: "VIC"
+}
 
 // call the API, wait then return the result
 const api = new openLDBWS(token);

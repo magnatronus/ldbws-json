@@ -49,6 +49,34 @@ const OperationInfo = {
        "key": "GetServiceDetailsResult",
        "type": "service"
     },
+    "GetArrivalDepartureBoardByCrs": {
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetArrivalDepartureBoardByTiploc": {
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetArrivalBoardByCrs":{
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetArrivalBoardByTiploc":{
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetDepartureBoardByCrs":{
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetDepartureBoardByTiploc":{
+        "key": "GetStationBoardResult",
+        "type": "board"
+    },
+    "GetHistoricDepartureBoard":{
+        "key": "DeparturesBoard",
+        "type": "departure"
+    }
  }
 
  module.exports = OperationInfo;

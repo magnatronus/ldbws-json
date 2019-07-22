@@ -36,24 +36,6 @@ class OpenLDBWS {
     return await this._parseResult(body, method);
   }
 
-  /**
-   * Query OpenLDBWS for the requested data
-   * @param {LDBWSOperation} method - the LDBWSOperation to perform 
-   * @param {LDBWSRequestData} options  - a JSON object derived from LDBWSRequestData
-   */
-  async staffCall(method, options) {
-    const soapCall = new LDBSVWSSoap(this.accessToken, method, options).generateCall();
-    const body = await request({
-        method: 'POST',
-        url: this.baseURL,
-        headers: {
-            'content-type' : "text/xml"
-        },
-        body: soapCall
-    });
-    return await this._parseResult(body, method);
-  }
-
   // Private method to parse result to JSON
   _parseResult(body, method) {
     return new Promise((resolve, reject) => {
