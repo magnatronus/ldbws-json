@@ -1,59 +1,53 @@
 'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * LDBWSOperation.js
- * This defines the available LDBWS Operation Requests. 
+ * LDBWSOperation.ts
+ * This defines the available LDBWS Operation Requests.
  * See https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ for more details.
  */
-
+const interfaces_1 = require("./interfaces");
 const Operation = {
-   GET_DEPARTURE_BOARD: "GetDepartureBoard",
-   GET_DEPARTURE_BOARD_WITH_DETAILS: "GetDepBoardWithDetails",
-   GET_ARRIVAL_BOARD: "GetArrivalBoard",
-   GET_ARRIVAL_BOARD_WITH_DETAILS : "GetArrBoardWithDetails",
-   GET_ARRIVAL_DEPARTURE_BOARD: "GetArrivalDepartureBoard",
-   GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS: "GetArrDepBoardWithDetails",
-   GET_NEXT_DEPARTURES: "GetNextDepartures",
-   GET_NEXT_DEPARTURES_WITH_DETAILS: "GetNextDeparturesWithDetails",
-   GET_FASTEST_DEPARTURES: "GetFastestDepartures",
-   GET_FASTEST_DEPARTURES_WITH_DETAILS: "GetFastestDeparturesWithDetails",
-   GET_SERVICE_DETAILS: "GetServiceDetails",
- }
-
- module.exports = Operation;
-
- const StaffOperation = {
-   GET_DEPARTURE_BOARD:                       "GetDepartureBoard",
-   GET_DEPARTURE_BOARD_WITH_DETAILS:          "GetDepBoardWithDetails",
-   GET_ARRIVAL_BOARD:                         "GetArrivalBoard",
-   GET_ARRIVAL_BOARD_WITH_DETAILS :           "GetArrBoardWithDetails",
-   GET_ARRIVAL_DEPARTURE_BOARD:               "GetArrivalDepartureBoard",
-   GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS:  "GetArrDepBoardWithDetails",
-   GET_NEXT_DEPARTURES:                       "GetNextDepartures",
-   GET_NEXT_DEPARTURES_WITH_DETAILS:          "GetNextDeparturesWithDetails",
-   GET_FASTEST_DEPARTURES:                    "GetFastestDepartures",
-   GET_FASTEST_DEPARTURES_WITH_DETAILS:       "GetFastestDeparturesWithDetails",
-   GET_SERVICE_DETAILS:                       "GetServiceDetails",
-
-   GET_ARR_BOARD_WITH_DETAILS:                "GetArrBoardWithDetails",
-   GET_ARR_DEP_BOARD_WITH_DETAILS:            "GetArrDepBoardWithDetails",
-   GET_ARRIVAL_DEPARTURE_BOARD_BY_CRS:        "GetArrivalDepartureBoardByCrs",
-   GET_ARRIVAL_DEPARTURE_BOARD_BY_TIPLOC:     "GetArrivalDepartureBoardByTiploc",
-   GET_ARRIVAL_BOARD_BY_CRS:                  "GetArrivalBoardByCrs",
-   GET_ARRIVAL_BOARD_BY_TIPLOC:               "GetArrivalBoardByTiploc",
-   GET_DEPARTURE_BOARD_BY_CRS:                "GetDepartureBoardByCrs",
-   GET_DEPARTURE_BOARD_BY_TIPLOC:             "GetDepartureBoardByTiploc",
-   GET_DEP_BOARD_WITH_DETAILS:                "GetDepBoardWithDetails",
-   GET_DISRUPTION_LIST:                       "GetDisruptionList",
-   GET_FASTEST_DEPARTURES:                    "GetFastestDepartures",
-   GET_FASTEST_DEPARTURES_WITH_DETAILS:       "GetFastestDeparturesWithDetails",
-   GET_HISTORIC_DEPARTURE_BOARD:              "GetHistoricDepartureBoard",
-   GET_HISTORIC_SERVICE_DETAILS:              "GetHistoricServiceDetails",
-   GET_HISTORIC_TIME_LINE:                    "GetHistoricTimeLine",
-   GET_NEXT_DEPARTURES:                       "GetNextDepartures",
-   GET_NEXT_DEPARTURES_WITH_DETAILS:          "GetNextDeparturesWithDetails",
-   GET_SERVICE_DETAILS_BY_RID:                "GetServiceDetailsByRid",
-   QUERY_HISTORIC_SERVICES:                   "QueryHistoricServices",
-   QUERY_SERVICES:                            "QueryServices",
- }
-
- module.exports.StaffOperation = StaffOperation;
+    GET_DEPARTURE_BOARD: interfaces_1.EOperation.GET_DEPARTURE_BOARD,
+    GET_DEPARTURE_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_DEPARTURE_BOARD_WITH_DETAILS,
+    GET_ARRIVAL_BOARD: interfaces_1.EOperation.GET_ARRIVAL_BOARD,
+    GET_ARRIVAL_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_ARRIVAL_BOARD_WITH_DETAILS,
+    GET_ARRIVAL_DEPARTURE_BOARD: interfaces_1.EOperation.GET_ARRIVAL_DEPARTURE_BOARD,
+    GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS,
+    GET_NEXT_DEPARTURES: interfaces_1.EOperation.GET_NEXT_DEPARTURES,
+    GET_NEXT_DEPARTURES_WITH_DETAILS: interfaces_1.EOperation.GET_NEXT_DEPARTURES_WITH_DETAILS,
+    GET_FASTEST_DEPARTURES: interfaces_1.EOperation.GET_FASTEST_DEPARTURES,
+    GET_FASTEST_DEPARTURES_WITH_DETAILS: interfaces_1.EOperation.GET_FASTEST_DEPARTURES_WITH_DETAILS,
+    GET_SERVICE_DETAILS: interfaces_1.EOperation.GET_SERVICE_DETAILS
+};
+exports.default = Operation;
+const StaffOperation = {
+    GET_DEPARTURE_BOARD: interfaces_1.EOperation.GET_DEPARTURE_BOARD,
+    GET_DEPARTURE_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_DEPARTURE_BOARD_WITH_DETAILS,
+    GET_ARRIVAL_BOARD: interfaces_1.EOperation.GET_ARRIVAL_BOARD,
+    GET_ARRIVAL_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_ARRIVAL_BOARD_WITH_DETAILS,
+    GET_ARRIVAL_DEPARTURE_BOARD: interfaces_1.EOperation.GET_ARRIVAL_DEPARTURE_BOARD,
+    GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS: interfaces_1.EOperation.GET_ARRIVAL_DEPARTURE_BOARD_WITH_DETAILS,
+    GET_NEXT_DEPARTURES: interfaces_1.EOperation.GET_NEXT_DEPARTURES,
+    GET_NEXT_DEPARTURES_WITH_DETAILS: interfaces_1.EOperation.GET_NEXT_DEPARTURES_WITH_DETAILS,
+    GET_FASTEST_DEPARTURES: interfaces_1.EOperation.GET_FASTEST_DEPARTURES,
+    GET_FASTEST_DEPARTURES_WITH_DETAILS: interfaces_1.EOperation.GET_FASTEST_DEPARTURES_WITH_DETAILS,
+    GET_SERVICE_DETAILS: interfaces_1.EOperation.GET_SERVICE_DETAILS,
+    GET_ARR_BOARD_WITH_DETAILS: interfaces_1.EStaffOperation.GET_ARR_BOARD_WITH_DETAILS,
+    GET_ARR_DEP_BOARD_WITH_DETAILS: interfaces_1.EStaffOperation.GET_ARR_DEP_BOARD_WITH_DETAILS,
+    GET_ARRIVAL_DEPARTURE_BOARD_BY_CRS: interfaces_1.EStaffOperation.GET_ARRIVAL_DEPARTURE_BOARD_BY_CRS,
+    GET_ARRIVAL_DEPARTURE_BOARD_BY_TIPLOC: interfaces_1.EStaffOperation.GET_ARRIVAL_DEPARTURE_BOARD_BY_TIPLOC,
+    GET_ARRIVAL_BOARD_BY_CRS: interfaces_1.EStaffOperation.GET_ARRIVAL_BOARD_BY_CRS,
+    GET_ARRIVAL_BOARD_BY_TIPLOC: interfaces_1.EStaffOperation.GET_ARRIVAL_BOARD_BY_TIPLOC,
+    GET_DEPARTURE_BOARD_BY_CRS: interfaces_1.EStaffOperation.GET_DEPARTURE_BOARD_BY_CRS,
+    GET_DEPARTURE_BOARD_BY_TIPLOC: interfaces_1.EStaffOperation.GET_DEPARTURE_BOARD_BY_TIPLOC,
+    GET_DEP_BOARD_WITH_DETAILS: interfaces_1.EStaffOperation.GET_DEP_BOARD_WITH_DETAILS,
+    GET_DISRUPTION_LIST: interfaces_1.EStaffOperation.GET_DISRUPTION_LIST,
+    GET_HISTORIC_DEPARTURE_BOARD: interfaces_1.EStaffOperation.GET_HISTORIC_DEPARTURE_BOARD,
+    GET_HISTORIC_SERVICE_DETAILS: interfaces_1.EStaffOperation.GET_HISTORIC_SERVICE_DETAILS,
+    GET_HISTORIC_TIME_LINE: interfaces_1.EStaffOperation.GET_HISTORIC_TIME_LINE,
+    GET_SERVICE_DETAILS_BY_RID: interfaces_1.EStaffOperation.GET_SERVICE_DETAILS_BY_RID,
+    QUERY_HISTORIC_SERVICES: interfaces_1.EStaffOperation.QUERY_HISTORIC_SERVICES,
+    QUERY_SERVICES: interfaces_1.EStaffOperation.QUERY_SERVICES,
+};
+exports.StaffOperation = StaffOperation;
+//# sourceMappingURL=LDBWSOperation.js.map
