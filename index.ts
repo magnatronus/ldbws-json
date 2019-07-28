@@ -7,9 +7,6 @@ import { IOpenLDBWS, EOperation, EStaffOperation, ESOAPStaffAction, ESOAPAction,
 import Operation, { StaffOperation } from "./LDBWSOperation";
 import delayCodes from "./referenceData/delayCodes";
 
-// import {fetch} from 'node-fetch';
-const fetch = require("node-fetch");
-
 const request = require('request-promise-native'),
   parseString = require('xml2js').parseString,
   stripNS = require('xml2js').processors.stripPrefix,
@@ -23,11 +20,10 @@ class OpenLDBWS implements IOpenLDBWS {
   staff: boolean = false;
   mapDelayCodeToReason: boolean = false;
 
-  constructor(accessToken: string = "0000-0000-0000-0000", staff: boolean = false, mapDelayCodeToReason: boolean = false) {//baseURL = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb10.asmx") {
+  constructor({accessToken = "0000-0000-0000-0000", staff = false} : {accessToken: string, staff?: boolean}) {//baseURL = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb10.asmx") {
     this.accessToken = accessToken;
     this.baseURL = staff ? "https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/ldbsv12.asmx" : "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb10.asmx";
     this.staff = staff;
-    this.mapDelayCodeToReason = mapDelayCodeToReason;
   }
 
   /**

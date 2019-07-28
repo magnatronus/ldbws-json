@@ -25,17 +25,14 @@ exports.Operation = LDBWSOperation_1.default;
 exports.StaffOperation = LDBWSOperation_1.StaffOperation;
 const delayCodes_1 = __importDefault(require("./referenceData/delayCodes"));
 exports.DelayCodes = delayCodes_1.default;
-// import {fetch} from 'node-fetch';
-const fetch = require("node-fetch");
 const request = require('request-promise-native'), parseString = require('xml2js').parseString, stripNS = require('xml2js').processors.stripPrefix, LDBWSSoap = require('./soap'), LDBSVWSSoap = require('./soap').LDBWSVWSSoap;
 class OpenLDBWS {
-    constructor(accessToken = "0000-0000-0000-0000", staff = false, mapDelayCodeToReason = false) {
+    constructor({ accessToken = "0000-0000-0000-0000", staff = false }) {
         this.staff = false;
         this.mapDelayCodeToReason = false;
         this.accessToken = accessToken;
         this.baseURL = staff ? "https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/ldbsv12.asmx" : "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb10.asmx";
         this.staff = staff;
-        this.mapDelayCodeToReason = mapDelayCodeToReason;
     }
     /**
      * @description Maps a delay code to it's corresponding textual reason
