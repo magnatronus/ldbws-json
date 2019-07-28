@@ -1,19 +1,29 @@
 # ldbws-json
 `ldbws-json` is a package that can be used to access the National Rail Enquiries [OpenLDBWS web service](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/) to query for real time train information. This is the same info that is used to power the Live Departure Boards at UK Railway stations. This service is a SOAP Web service and the ouput is XML, so this package was created to convert these calls into a JSON format.
 
-## Access Token
-To use the OpenLDBWS service you **MUST** supply a valid token, which can be obtained by registering. IF no **token**, or an invalid one is supplied the call will be rejected. See [here](http://www.nationalrail.co.uk/100296.aspx) for more details on registering as a developer.
+Support for the staff web service, [OpenLBDSVWS web service](https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/) is also available. They key provided from this service is independent and different from the key provided by the OpenLDBWS service.
 
+## Access Token
+To use the OpenLDBWS or OpenLDBSVWS service you **MUST** supply a valid token, which can be obtained by registering. IF no **token**, or an invalid one is supplied the call will be rejected. See [here](http://www.nationalrail.co.uk/100296.aspx) for more details on registering as a developer.
 
 ## Overview
 The main class used should be accessed as follows:
 
-    const openLDBWS = require('ldbws-json');
+    const LBDWS_KEY = "<YOUR_OPENLDBWS_KEY>";
+    const openLDBWSCl = require('ldbws-json');
+    const openLDBWS = new openLDBWSCl({ accessToken: LDBWS_KEY });
 
-then create an instance and pass it a valid access token.
+If you are using typescript or have import support available, you can instead use the following to get necessary interfaces, enums, and operations;
 
-    const api = new openLDBWS("{my access token}");
+    const LBDWS_KEY = "<YOUR_OPENLDBWS_KEY>";
+    import openLDBWSCl, {EOperation, IOperationInfo, Operation, StaffOperation} from 'ldbws-json';
+    const openLDBWS = new openLDBWSCl({ accessToken: LDBWS_KEY });
 
+If you wish to use the staff endpoint (OpenLDBSVWS);
+
+    const LBDWS_KEY = "<YOUR_OPENLDBSVWS_KEY>";
+    import openLDBWSCl, {EOperation, IOperationInfo, Operation, StaffOperation} from 'ldbws-json';
+    const openLDBWS = new openLDBWSCl({ accessToken: LDBSVWS_KEY, staff: true });
 
 The method to obtain data is **call**. This is an **async** method so must be called using either *await* or as a *promise*.
 
@@ -30,7 +40,7 @@ There are 2 other helpers available as well:
 
 See the usage example below for details on how to use these. 
 
-To find out which **LDBWSRequestData** object to use for each operation see the OpenLDBWS documentation [here](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/)
+To find out which **LDBWSRequestData** object to use for each operation see the OpenLDBWS documentation [here](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/) or the staff version at the OpenLDBSVWS documentation [here](https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/)
 
 ## Usage
 To use this package add it to your project
@@ -54,8 +64,11 @@ const method = operation.GET_DEPARTURE_BOARD;
 const key = operationInfo[method].key;
 
 // populate the required data structure here we use the CRS code for London Victoria
-const options = Object.assign({}, requestData.Board);
-options.crs = "VIC";
+// This uses the spread operator so a recent node version is needed
+const options = {
+    ...requestData.Board,
+    crs: "VIC"
+}
 
 // call the API, wait then return the result
 const api = new openLDBWS(token);
@@ -64,6 +77,26 @@ api.call(operation.GET_DEPARTURE_BOARD, options).then((board)=>{
     console.log(board[key].locationName);
 });
 
+```
+
+A more concise version using the interfaces included with ldbws-json would look like this;
+```
+const STAFF_KEY = "<YOUR_OPENLBDSVWS_KEY>";
+const PUBLIC_KEY = "<YOUR_OPENLBDWS_KEY>";
+
+import openLDBWSCl, {EOperation, IOperationInfo, Operation, StaffOperation} from 'ldbws-json';
+const openLDBWS = new openLDBWSCl({accessToken: STAFF_KEY, staff: true});
+const moment = require("moment");
+
+const data = await openLDBWS.call(StaffOperation.GET_DEPARTURE_BOARD_WITH_DETAILS, {
+    crs: "LDS",
+    numRows: 10,
+    time: moment().format("YYYY-MM-DD[T]HH:mm:ss"),
+    filterType: "to",
+    timeWindow: 60,
+});
+
+  res.send(data);
 ```
 
 # Departure type calls
