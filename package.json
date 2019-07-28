@@ -48,8 +48,10 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
+    "sax": "^1.2.4",
     "xml2js": "^0.4.19"
   }
 }

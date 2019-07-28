@@ -6,7 +6,6 @@
  */
 
 import { ILDBWSSoap, ILDBWSSoapOptions } from "../interfaces";
-import forEach from "lodash/forEach";
 import map from "lodash/map";
 
 class LDBWSSoap implements ILDBWSSoap {
@@ -32,7 +31,7 @@ class LDBWSSoap implements ILDBWSSoap {
      * Generate the complete SOAP call based on the params passed to the class constructor
      */
     generateCall(): string {
-        return  `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">` +
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">` +
                 `${this._header()}` +
                 `${this._payload(this.options)}` +
                 `</Envelope>`;
@@ -52,7 +51,7 @@ class LDBWSSoap implements ILDBWSSoap {
             return `<${key}>${value}</${key}>`;
         }).join("");
 
-        return `<Body><${this.request}Request xmlns="http://thalesgroup.com/RTTI/2017-02-02/ldb/">${body}</${this.request}Request></Body>`;
+        return `<Body><${this.request}Request xmlns="http://thalesgroup.com/RTTI/2017-10-01/ldbsv/">${body}</${this.request}Request></Body>`;
     }
 
     // generate the SOAP header

@@ -39,7 +39,7 @@ class LDBWSSoap {
             })();
             return `<${key}>${value}</${key}>`;
         }).join("");
-        return `<Body><${this.request}Request xmlns="http://thalesgroup.com/RTTI/2017-02-02/ldb/">${body}</${this.request}Request></Body>`;
+        return `<Body><${this.request}Request xmlns="http://thalesgroup.com/RTTI/2017-10-01/ldbsv/">${body}</${this.request}Request></Body>`;
     }
     // generate the SOAP header
     _header() {

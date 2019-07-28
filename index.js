@@ -6,6 +6,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * index.js
@@ -20,28 +23,56 @@ exports.ELDBWSOperationInfoKeys = interfaces_1.ELDBWSOperationInfoKeys;
 const LDBWSOperation_1 = __importStar(require("./LDBWSOperation"));
 exports.Operation = LDBWSOperation_1.default;
 exports.StaffOperation = LDBWSOperation_1.StaffOperation;
+const delayCodes_1 = __importDefault(require("./referenceData/delayCodes"));
+exports.DelayCodes = delayCodes_1.default;
+// import {fetch} from 'node-fetch';
+const fetch = require("node-fetch");
 const request = require('request-promise-native'), parseString = require('xml2js').parseString, stripNS = require('xml2js').processors.stripPrefix, LDBWSSoap = require('./soap'), LDBSVWSSoap = require('./soap').LDBWSVWSSoap;
 class OpenLDBWS {
-    constructor(accessToken = "0000-0000-0000-0000", staff = false) {
+    constructor(accessToken = "0000-0000-0000-0000", staff = false, mapDelayCodeToReason = false) {
         this.staff = false;
+        this.mapDelayCodeToReason = false;
         this.accessToken = accessToken;
         this.baseURL = staff ? "https://lite.realtime.nationalrail.co.uk/OpenLDBSVWS/ldbsv12.asmx" : "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb10.asmx";
+        this.staff = staff;
+        this.mapDelayCodeToReason = mapDelayCodeToReason;
+    }
+    /**
+     * @description Maps a delay code to it's corresponding textual reason
+     * @param {string} code The delayCode to map
+     * @returns {string} The textual reason for the delay
+     */
+    getDelayReason(code) {
+        if (!code) {
+            return;
+        }
+        if (delayCodes_1.default[code]) {
+            return delayCodes_1.default[code];
+        }
+        ;
+        return;
     }
     /**
      * Query OpenLDBWS for the requested data
-     * @param {LDBWSOperation} method - the LDBWSOperation to perform
+     * @param {Operation | StaffOperation} method - the LDBWSOperation to perform
      * @param {LDBWSRequestData} options  - a JSON object derived from LDBWSRequestData
      */
     async call(method, options) {
         const soapCall = new LDBWSSoap(this.accessToken, method, options).generateCall();
-        const body = await request({
+        const SOAPAction = this.staff ? interfaces_1.ESOAPStaffAction[method] : interfaces_1.ESOAPAction[method];
+        // console.log("Method: ", method);
+        // console.log("SOAPAction: ", SOAPAction);
+        // console.log("Available actions: ", (this.staff) ? ESOAPStaffAction : ESOAPAction);
+        const reqToSend = {
             method: 'POST',
             url: this.baseURL,
             headers: {
-                'content-type': "text/xml"
+                'content-type': "text/xml",
+                'SOAPAction': SOAPAction,
             },
             body: soapCall
-        });
+        };
+        const body = await request(reqToSend);
         return await this._parseResult(body, method);
     }
     // Private method to parse result to JSON
