@@ -1,6 +1,10 @@
 # ldbws-json
 `ldbws-json` is a package that can be used to access the National Rail Enquiries [OpenLDBWS web service](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/) to query for real time train information. This is the same info that is used to power the Live Departure Boards at UK Railway stations. This service is a SOAP Web service and the ouput is XML, so this package was created to convert these calls into a JSON format.
 
+## Notice
+This package is no longer be actively maintained, it has been replaced with https://www.npmjs.com/package/ldbs-json which can be used by both USER and STAFF Versions of the API.
+
+
 ## Access Token
 To use the OpenLDBWS service you **MUST** supply a valid token, which can be obtained by registering. IF no **token**, or an invalid one is supplied the call will be rejected. See [here](http://www.nationalrail.co.uk/100296.aspx) for more details on registering as a developer.
 
